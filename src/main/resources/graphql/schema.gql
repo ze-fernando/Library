@@ -1,0 +1,72 @@
+type Query {
+    # Book
+    getBookById(id: ID!): Book
+    getBooksByAuthor(author: String!): [Book!]!
+    getBooksByCategory(category: String!): [Book!]!
+    getBooksByAgeGroup(ageGroup: AgeGroup!): [Book!]!
+    getBooksByUser(userId: ID!): [Book!]!
+    getBooksByYear(year: Int!): [Book]!
+
+    # Loan
+    getLoanById(id: ID!): Loan
+    getLoansByBookId(bookId: ID!): [Loan!]!
+    getLoansByUserId(userId: ID!): [Loan!]!
+    getLoansByStatus(status: Status!): [Loan!]!
+    getLoansByReturnDate(returnDate: String!): [Loan!]!
+
+    # User
+    getUsersByName(firstName: String!): [User!]!
+    getUsersByBookId(bookId: ID!): [User!]!
+}
+
+
+type Mutation {
+    createBook(title: String!, year: Int!, status: Status!, author: String!, category: String!, ageGroup: AgeGroup!): Book!
+    updateBook(id: ID!, title: String, year: Int, status: Status, author: String, category: String, ageGroup: AgeGroup): Book!
+    deleteBook(id: ID!): String!
+    
+    createLoan(bookId: ID!, userId: ID!, status: Status!, returnDate: String!): Loan!
+    updateLoan(id: ID!, status: Status, returnDate: String): Loan!
+    deleteLoan(id: ID!): String!
+    
+    createUser(firstName: String!, age: Int!, tel: String!): User!
+    updateUser(id: ID!, firstName: String, age: Int, tel: String): User!
+    deleteUser(id: ID!): String!
+}
+
+type Book {
+    id: ID!
+    title: String!
+    year: Int!
+    status: Status!
+    author: String!
+    category: String!
+    ageGroup: AgeGroup!
+}
+
+type Loan {
+    id: ID!
+    book: Book!
+    user: User!
+    status: Status!
+    returnDate: String!
+}
+
+type User {
+    id: ID!
+    firstName: String!
+    age: Int!
+    books: [Book!]!
+    tel: String!
+}
+
+enum Status {
+    AVAILABLE
+    UNAVAILABLE
+}
+
+enum AgeGroup {
+    CHILDREN
+    TEEN
+    ADULT
+}
