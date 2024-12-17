@@ -8,5 +8,4 @@ import com.zefernando.library.models.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
     List<User> findByName(String name);
-    List<User> findByBookId(Long bookId);
 }
