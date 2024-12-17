@@ -22,7 +22,7 @@ public class Book {
     private String title;
 
     @Column(nullable = false)
-    private int year;
+    private Integer year;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
