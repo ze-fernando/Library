@@ -35,7 +35,7 @@ public class UserService {
     }
 
     public List<User> getByName(String name) {
-        return repository.findByName(name);
+        return repository.findByFirstName(name);
     }
 
     public User update(Long id, UserDto userDto) {

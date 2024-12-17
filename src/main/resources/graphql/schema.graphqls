@@ -1,22 +1,22 @@
 type Query {
     # Book
+    getAllBooks: [Book]
     getBookById(id: ID!): Book
-    getBooksByAuthor(author: String!): [Book!]!
-    getBooksByCategory(category: String!): [Book!]!
-    getBooksByAgeGroup(ageGroup: AgeGroup!): [Book!]!
-    getBooksByYear(year: Int!): [Book]!
-    getAllBooks(): [Book!]!
+    getBooksByYear(year: Int!): [Book]
+    getBooksByAuthor(author: String!): [Book]
+    getBooksByCategory(category: String!): [Book]
+    getBooksByAgeGroup(ageGroup: AgeGroup!): [Book]
 
     # Loan
+    getAllLoans: [Loan]
     getLoanById(id: ID!): Loan
-    getLoansByBookId(bookId: ID!): [Loan!]!
-    getLoansByUserId(userId: ID!): [Loan!]!
-    getLoansByStatus(status: Status!): [Loan!]!
-    getAllLoans(): [Loan!]!
+    getLoansByBookId(bookId: ID!): [Loan]
+    getLoansByUserId(userId: ID!): [Loan]
+    getLoansByStatus(status: Status!): [Loan]
 
     # User
-    getUsersByName(firstName: String!): [User!]!
-    getAllUsers(): [User!]!
+    getAllUsers: [User]
+    getUsersByName(firstName: String!): [User]
 }
 
 
@@ -62,7 +62,7 @@ type User {
 
 enum Status {
     AVAILABLE
-    UNAVAILABLE
+    LOAN
 }
 
 enum AgeGroup {
