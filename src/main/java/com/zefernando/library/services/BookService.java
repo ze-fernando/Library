@@ -16,7 +16,7 @@ public class BookService {
     @Autowired
     private BookRepository repository;
 
-    public Book createBook(BookDto bookDto) {
+    public Book create(BookDto bookDto) {
         Book book = new Book();
         book.setTitle(bookDto.title());
         book.setYear(bookDto.year());
@@ -28,27 +28,35 @@ public class BookService {
         return repository.save(book);
     }
 
-    public List<Book> getAllBooks() {
+    public List<Book> getAll() {
         return repository.findAll();
     }
 
-    public List<Book> getBooksByAuthor(String author) {
+    public Book getById(Long id){
+        return repository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
+    }
+    public List<Book> getByAuthor(String author) {
         return repository.findByAuthor(author);
     }
 
-    public List<Book> getBooksByCategory(String category) {
+    public List<Book> getByCategory(String category) {
         return repository.findByCategory(category);
     }
 
-    public List<Book> getBooksByAgeGroup(AgeGroup ageGroup) {
+    public List<Book> gesByAgeGroup(AgeGroup ageGroup) {
         return repository.findByAgeGroup(ageGroup);
     }
 
-    public List<Book> getBooksByYear(Integer year) {
+    public List<Book> getByYear(Integer year) {
         return repository.findByYear(year);
     }
 
-    public Book updateBook(Long id, BookDto bookDto) {
+    public List<Book> getByAgeGroup(AgeGroup ageGroup){
+        return repository.findByAgeGroup(ageGroup);
+    }
+
+    public Book update(Long id, BookDto bookDto) {
         Book dbBook = repository.findById(id)
             .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
 
@@ -62,7 +70,7 @@ public class BookService {
         return repository.save(dbBook);
     }
 
-    public void deleteBook(Long id) {
+    public void delete(Long id) {
         if (!repository.existsById(id)) {
             throw new RuntimeException("Book not found with id: " + id);
         }

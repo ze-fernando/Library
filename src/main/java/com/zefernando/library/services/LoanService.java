@@ -16,7 +16,12 @@ public class LoanService {
     @Autowired
     private LoanRepository repository;
 
-    public Loan createLoan(LoanDto loanDto) {
+    public Loan getById(Long id){
+        return repository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Loan not found with id: " + id));
+    }
+
+    public Loan create(LoanDto loanDto) {
         Loan loan = new Loan();
         loan.setBook(loanDto.book());
         loan.setUser(loanDto.user());
@@ -26,23 +31,23 @@ public class LoanService {
         return repository.save(loan);
     }
 
-    public List<Loan> getAllLoans() {
+    public List<Loan> getAll() {
         return repository.findAll();
     }
 
-    public List<Loan> getLoansByBookId(Long bookId) {
+    public List<Loan> getByBookId(Long bookId) {
         return repository.findByBookId(bookId);
     }
 
-    public List<Loan> getLoansByUserId(Long userId) {
+    public List<Loan> getByUserId(Long userId) {
         return repository.findByUserId(userId);
     }
 
-    public List<Loan> getLoansByStatus(Status status) {
+    public List<Loan> getByStatus(Status status) {
         return repository.findByStatus(status);
     }
 
-    public Loan updateLoan(Long id, LoanDto loanDto) {
+    public Loan update(Long id, LoanDto loanDto) {
         Loan dbLoan = repository.findById(id)
             .orElseThrow(() -> new RuntimeException("Loan not found with id: " + id));
 
@@ -54,10 +59,11 @@ public class LoanService {
         return repository.save(dbLoan);
     }
 
-    public void deleteLoan(Long id) {
+    public void delete(Long id) {
         if (!repository.existsById(id)) {
             throw new RuntimeException("Loan not found with id: " + id);
         }
         repository.deleteById(id);
     }
+
 }

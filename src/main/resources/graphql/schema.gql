@@ -4,19 +4,19 @@ type Query {
     getBooksByAuthor(author: String!): [Book!]!
     getBooksByCategory(category: String!): [Book!]!
     getBooksByAgeGroup(ageGroup: AgeGroup!): [Book!]!
-    getBooksByUser(userId: ID!): [Book!]!
     getBooksByYear(year: Int!): [Book]!
+    getAllBooks(): [Book!]!
 
     # Loan
     getLoanById(id: ID!): Loan
     getLoansByBookId(bookId: ID!): [Loan!]!
     getLoansByUserId(userId: ID!): [Loan!]!
     getLoansByStatus(status: Status!): [Loan!]!
-    getLoansByReturnDate(returnDate: String!): [Loan!]!
+    getAllLoans(): [Loan!]!
 
     # User
     getUsersByName(firstName: String!): [User!]!
-    getUsersByBookId(bookId: ID!): [User!]!
+    getAllUsers(): [User!]!
 }
 
 
